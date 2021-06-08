@@ -1,10 +1,19 @@
 #!/bin/bash
 
-#counting number of files in a directory:
-#tree | awk '{ print $3 }' | tail -n 1
+clear
 
-#printing all directories and subdir:
-#ls -lR | grep '^[d*]' | awk '{ print $9 }'
+find . -type d | while read -r dir
+do 
+    printf "%s:\t" "$dir" >> temp.txt; 
+    find "$dir" -type f | wc -l >> temp.txt; 
+done
 
+echo "DIRECTORIES: "
+awk '{ print $NF,$0 }' temp.txt | sort -k1,1 -nr | cut -f2- -d' '
+
+rm -rf temp.txt
+
+echo
+echo "FILES: "
 #listing all files in a directory based on size:
 ls -lRS | grep '^[^d*]' | awk '{ print $9 " " $7 }' | sort -k 2nr
