@@ -4,10 +4,6 @@ clear
 
 file=$1
 
-#cat $file
-
-#words=$(wc -w < $file)
-
 grep -ow '\bs[^a]\w*\b' $file
 echo
 
