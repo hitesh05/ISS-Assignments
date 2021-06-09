@@ -23,7 +23,7 @@ while IFS= read -r line; do
    ans=`echo "($occurences/$length)" | bc -l`
 
    echo -n $name >> Output.txt
-   echo -n "," >> Output.txt
+   echo -n ", " >> Output.txt
    echo $ans >> Output.txt
 }
 done < "input.txt"
