@@ -33,7 +33,9 @@ case "$1" in
     }
     done
 
-    awk '{print $1}' contacts.csv | sed -i "/\b$modified\b/d" contacts.csv
+    #awk '{print $1}' contacts.csv | sed -i "/\b$modified\b/d" contacts.csv
+    data=$(awk -v term="$modified" 'toupper($1)==toupper(term)' contacts.csv)
+    grep -v "$data" contacts.csv > temp.csv; mv temp.csv contacts.csv
     echo -e "$first\t""$last\t""$number\t""$company" >> "contacts.csv"
     ;;
 
@@ -72,8 +74,6 @@ case "$1" in
     done
 
     data=$(awk -v col=$column -v term="$value" 'toupper($col)==toupper(term)' contacts.csv)
-    #echo $data
-    #sed -i "s/$data//g" contacts.csv
     grep -v "$data" contacts.csv > temp.csv; mv temp.csv contacts.csv
     ;;    
 
