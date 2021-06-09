@@ -2,13 +2,19 @@
 
 clear
 
+if test "$1" = ""
+    then
+        echo "Error! Input file not supplied!"
+        exit
+fi
+
 declare -r filename=$1
 
+#extracting name
 name=`cat $1 | awk '{print $1}'`
-# echo $name
 
+#extracting dob
 dob=`cat $1 | awk '{print $2}'`
-# echo $dob
 
 d=`echo $dob | cut -c1-2`
 m=`echo $dob | cut -c4-5`
@@ -18,6 +24,7 @@ yy=`date "+%Y"`
 mm=`date "+%m"`
 dd=`date "+%d"`
 
+#finding age:
 if [ $y -le $yy ]
 then
 yyy=`expr $yy - $y`
@@ -31,5 +38,4 @@ fi
 touch $name" "$yyy".txt"
 
 echo $name" "$yyy > $name" "$yyy".txt"
-# echo -n $yyy >> $name" "$yyy".txt"
 

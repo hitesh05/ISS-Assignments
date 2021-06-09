@@ -2,6 +2,12 @@
 
 clear
 
+if test "$1" = ""
+    then
+        echo "Error! Input file not supplied!"
+        exit
+fi
+
 file=$1
 
 grep -ow '\bs[^a]\w*\b' $file
