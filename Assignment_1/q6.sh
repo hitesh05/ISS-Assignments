@@ -16,7 +16,7 @@ case "$1" in
     }
     done
 
-    echo -e "$first\t""$last\t""$number\t""$company" >> "contacts.csv"
+    echo -e "$first"", ""$last"", ""$number"", ""$company" >> "contacts.csv"
     ;;
 
 -edit)
@@ -33,10 +33,11 @@ case "$1" in
     }
     done
 
+    modified+=","
     #awk '{print $1}' contacts.csv | sed -i "/\b$modified\b/d" contacts.csv
     data=$(awk -v term="$modified" 'toupper($1)==toupper(term)' contacts.csv)
     grep -v "$data" contacts.csv > temp.csv; mv temp.csv contacts.csv
-    echo -e "$first\t""$last\t""$number\t""$company" >> "contacts.csv"
+    echo -e "$first"", ""$last"", ""$number"", ""$company" >> "contacts.csv"
     ;;
 
 -display)
@@ -58,6 +59,7 @@ case "$1" in
     }
     done
 
+    value+=","
     data=$(awk -v col=$column -v term="$value" 'toupper($col)==toupper(term)' contacts.csv)
     echo $data
     ;;
@@ -73,8 +75,14 @@ case "$1" in
     }
     done
 
+    value+=","
     data=$(awk -v col=$column -v term="$value" 'toupper($col)==toupper(term)' contacts.csv)
     grep -v "$data" contacts.csv > temp.csv; mv temp.csv contacts.csv
-    ;;    
+    ;; 
+
+*)
+    echo Error! Flag not recognised!
+    exit 0
+    ;;
 
 esac
