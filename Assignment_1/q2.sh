@@ -10,11 +10,11 @@ fi
 
 declare -r filename=$1
 
-#extracting name
-name=`cat $1 | awk '{print $1}'`
+name=`cat $1 | awk '{$NF=""; print $0}'`
+#echo $name
 
-#extracting dob
-dob=`cat $1 | awk '{print $2}'`
+dob=`cat $1 | awk '{print $NF}'`
+# echo $dob
 
 d=`echo $dob | cut -c1-2`
 m=`echo $dob | cut -c4-5`
@@ -24,7 +24,6 @@ yy=`date "+%Y"`
 mm=`date "+%m"`
 dd=`date "+%d"`
 
-#finding age:
 if [ $y -le $yy ]
 then
 yyy=`expr $yy - $y`
@@ -35,7 +34,8 @@ fi
 fi
 #echo "Your age : $yyy years"
 
-touch $name" "$yyy".txt"
+touch "$name"" "$yyy".txt"
 
-echo $name" "$yyy > $name" "$yyy".txt"
+echo "$name"" "$yyy > "$name"" "$yyy".txt"
+# echo -n $yyy >> $name" "$yyy".txt"
 
