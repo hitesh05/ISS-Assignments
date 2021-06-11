@@ -12,7 +12,7 @@ rm -rf Output.txt
 while IFS= read -r line; do
 {
    name="$line"
-   sed -i "s/\b$name[!.,?]*\b//g" "$input"
+   sed -i "s/\b$name\b[[:punct:]]*//g" "$input"
 }
 done < "$filename"
 
@@ -27,7 +27,7 @@ while IFS= read -r line; do
    ans=`echo "($occurences/$length)" | bc -l`
 
    echo -n $name >> Output.txt
-   echo -n ", " >> Output.txt
+   echo -n " , " >> Output.txt
    echo $ans >> Output.txt
 }
 done < "input.txt"
