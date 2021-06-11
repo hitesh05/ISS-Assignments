@@ -4,7 +4,13 @@ clear
 
 y=$PWD
 
-x=$1
+if test "$1" = ""
+then
+    x=$PWD
+else
+    x=$1
+fi
+
 cd $x
 
 find . -type d | while read -r dir

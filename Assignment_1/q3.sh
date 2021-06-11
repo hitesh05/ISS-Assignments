@@ -14,7 +14,7 @@ file=$1
 
 #words=$(wc -w < $file)
 
-grep -ow '\bs[^a]\w*\b' $file
+grep -ow '\bs[^a^ ]\w*\b' $file
 echo
 
 grep -ow '\bwh\w*\b' $file
@@ -23,4 +23,4 @@ echo
 grep -ow '\bth\w*\b' $file
 echo
 
-grep -ow '\ba[^n][a-zA-Z]*\b' $file
+grep -ow '\ba[^n^ ]\w*\b' $file
