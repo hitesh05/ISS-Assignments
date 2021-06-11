@@ -2,8 +2,11 @@
 
 clear
 
-case "$1" in
--insert)
+#echo "fname, ""lname, ""number, ""office, " >> contacts.csv
+
+case "$2" in
+insert)
+    shift
     shift
     while getopts 'f:l:n:o:' flag; do
     {
@@ -19,7 +22,8 @@ case "$1" in
     echo -e "$first"", ""$last"", ""$number"", ""$company" >> "contacts.csv"
     ;;
 
--edit)
+edit)
+    shift
     shift
     while getopts 'k:f:l:n:o:' flag; do
     {
@@ -40,7 +44,8 @@ case "$1" in
     echo -e "$first"", ""$last"", ""$number"", ""$company" >> "contacts.csv"
     ;;
 
--display)
+display)
+    shift
     shift
     case "$1" in 
         -a) sort "contacts.csv" ;;
@@ -48,34 +53,71 @@ case "$1" in
     esac
     ;;
 
--search)
+search)
     shift
+    shift
+
     while getopts 'c:v:' flag; do
     {
         case "${flag}" in
-            c) column=${OPTARG} ;;
+            c) input=${OPTARG} 
+            if test $input = "fname";
+            then
+                column=1
+            fi
+
+            if test $input = "lname";
+            then
+                column=2
+            fi
+
+            if test $input = "mobile";
+            then
+                column=4
+
+            fi
+            ;;
             v) value=${OPTARG} ;;
         esac
     }
     done
 
-    value+=","
+   value+=","
+
     data=$(awk -v col=$column -v term="$value" 'toupper($col)==toupper(term)' contacts.csv)
     echo $data
     ;;
 
--delete)
+delete)
+    shift
     shift
     while getopts 'c:v:' flag; do
     {
         case "${flag}" in
-            c) column=${OPTARG} ;;
+            c) input=${OPTARG} 
+            if test $input = "fname";
+            then
+                column=1
+            fi
+
+            if test $input = "lname";
+            then
+                column=2
+            fi
+
+            if test $input = "mobile";
+            then
+                column=4
+
+            fi
+            ;;
             v) value=${OPTARG} ;;
         esac
     }
     done
 
     value+=","
+
     data=$(awk -v col=$column -v term="$value" 'toupper($col)==toupper(term)' contacts.csv)
     grep -v "$data" contacts.csv > temp.csv; mv temp.csv contacts.csv
     ;; 
