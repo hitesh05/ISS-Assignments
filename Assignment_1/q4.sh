@@ -5,7 +5,7 @@ clear
 input="$1"
 filename="$2"
 
-rm -rf Output.txt
+#rm -rf Output.txt
 #cat input_2.txt > input.txt
 
 #deleting noise words:
