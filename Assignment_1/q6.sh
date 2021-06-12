@@ -2,7 +2,12 @@
 
 clear
 
-#echo "fname, ""lname, ""number, ""office, " >> contacts.csv
+words=`cat contacts.csv | wc -w`
+
+if test $words = 0
+then
+    echo "fname, ""lname, ""mobile, ""Office, " >> contacts.csv
+fi
 
 case "$2" in
 insert)
