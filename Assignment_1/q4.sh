@@ -5,6 +5,8 @@ clear
 input="$1"
 filename="$2"
 
+cat $input > test.txt
+
 #rm -rf Output.txt
 #cat input_2.txt > input.txt
 
@@ -14,7 +16,7 @@ while IFS= read -r line; do
    name="$line"
    sed -i "s/\b$name\b[[:punct:]]*//g" "$input"
 }
-done < "$filename"
+done < "test.txt"
 
 while IFS= read -r line; do
 {
@@ -30,4 +32,6 @@ while IFS= read -r line; do
    echo -n " , " >> Output.txt
    echo $ans >> Output.txt
 }
-done < "input.txt"
+done < "test.txt"
+
+rm -rf test.txt
