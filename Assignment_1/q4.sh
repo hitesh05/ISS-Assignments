@@ -7,9 +7,6 @@ filename="$2"
 
 cat $input > test.txt
 
-#rm -rf Output.txt
-#cat input_2.txt > input.txt
-
 #deleting noise words:
 while IFS= read -r line; do
 {
