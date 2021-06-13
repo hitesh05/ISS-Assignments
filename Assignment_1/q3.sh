@@ -14,13 +14,16 @@ file=$1
 
 #words=$(wc -w < $file)
 
-grep -ow '\bs[^a^ ]\w*\b' $file
+grep -ow '\bs[^a^ ]\w*\b' $file | tr '\n' ','
+echo
 echo
 
-grep -ow '\bwh\w*\b' $file
+grep -ow '\bwh\w*\b' $file | tr '\n' ','
+echo
 echo
 
-grep -ow '\bth\w*\b' $file
+grep -ow '\bth\w*\b' $file | tr '\n' ','
+echo
 echo
 
-grep -ow '\ba[^n^ ]\w*\b' $file
+grep -ow '\ba[^n^ ]\w*\b' $file | tr '\n' ','

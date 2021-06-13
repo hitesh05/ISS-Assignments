@@ -18,12 +18,12 @@ while IFS= read -r line; do
    ((length=length-4))
 
    str1=`echo ${name:0:4}`
-   echo -n $str1
+   echo -n $str1 >> "q1_output.txt"
 
    for ((i=0;i<$length;i++))
    do
    {
-       echo -n '#'
+       echo -n '#' >> "q1_output.txt"
    }
    done
    echo
