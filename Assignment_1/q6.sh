@@ -18,23 +18,38 @@ then
 fi
 #echo >> "contacts.csv"
 
-while getopts 'C:f:l:n:o:k:a:d:c:v:' flag; do
+while getopts 'C:f:l:n:o:k:c:v:' flag; do
 {
     case "${flag}" in
-        C) command=${OPTARG} ;;
+        C) command=${OPTARG}
+        if test "$command" = "display"
+        then
+        {
+            shift
+            if test "$2" = "-a"
+            then
+            {
+                sort "contacts.csv" | sed 's/ //g'
+            }
+
+            elif test "$2" = "-d"
+            then
+            {
+                head -n 1 contacts.csv
+                lines=`cat contacts.csv | wc -l`
+                ((lines=lines-1))
+                tail -n $lines contacts.csv | sort -r | sed 's/ //g'
+            }
+            fi
+            exit 0;
+        }
+        fi
+        ;;
         f) first=${OPTARG} ;;
         l) last=${OPTARG} ;;
         n) number=${OPTARG} ;;
         o) company=${OPTARG} ;;
         k) modified=${OPTARG} ;;
-        a) sort "contacts.csv"; exit 0 ;;
-        d) 
-        head -n 1 contacts.csv
-        lines=`cat contacts.csv | wc -l`
-        ((lines=lines-1))
-        tail -n $lines contacts.csv | sort -r
-        exit 0
-        ;;
         c) input=${OPTARG} 
         if test $input = "fname";
         then
@@ -80,24 +95,12 @@ then
     echo "$first"", ""$last"", ""$number"", ""$company" >> "contacts.csv"
 }
 
-# elif test "$command" = "display"
-# then
-# {
-#     if test "$sort_order" = "ascending"
-#     then
-#         sort "contacts.csv"
-    
-#     else
-#         sort -r "contacts.csv"
-#     fi
-# }
-
 elif test "$command" = "search"
 then
 {
-    if test $column = "4"
+    if test "$column" = "4"
     then 
-        value=value
+        value=$value
     else
         value+=","
     fi
@@ -105,9 +108,10 @@ then
     echo $data
 }
 
-else
+elif test "$command" = "delete"
+then
 {
-    if test $column = "4"
+    if test "$column" = "4"
     then 
         value=$value
     else
