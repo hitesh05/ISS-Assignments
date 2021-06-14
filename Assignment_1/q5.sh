@@ -15,19 +15,21 @@ cd $x
 
 find . -type d | while read -r dir
 do 
-    printf "%s:\t" "$dir" >> temp.txt; 
-    find "$dir" -type f | wc -l >> temp.txt; 
+    printf "%s " "$dir" >> temp.txt; 
+    data=$(find "$dir" -type f | wc -l); 
+    data+=" file(s)"
+    echo $data >> temp.txt
 done
 
 echo
-echo "DIRECTORIES: "
+echo "Directories: "
 awk '{ print $NF,$0 }' temp.txt | sort -k1,1 -nr | cut -f2- -d' '
 
-rm -rf temp.txt
+#rm -rf temp.txt
 
 echo
-echo "FILES: "
+echo "Files: "
 #listing all files in a directory based on size:
-ls -lRS | grep '^[^d*]' | awk '{ print $9 " " $7 }' | sort -k 2nr
+ls -lRS | grep '^[^d*]' | awk '{ print $9 }' | sort -k 2nr
 
 cd $y
