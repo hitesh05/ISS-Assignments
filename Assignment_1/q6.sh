@@ -29,13 +29,15 @@ while getopts 'C:f:l:n:o:k:c:v:' flag; do
             if test "$2" = "-a"
             then
             {
-                sort "contacts.csv" | sed 's/ //g'
+                lines=$(wc -l < "contacts.csv")
+                ((lines=lines-1))
+                sort "contacts.csv" | sed 's/ //g' | tail -n $lines
             }
 
             elif test "$2" = "-d"
             then
             {
-                head -n 1 contacts.csv
+               # head -n 1 contacts.csv
                 lines=`cat contacts.csv | wc -l`
                 ((lines=lines-1))
                 tail -n $lines contacts.csv | sort -r | sed 's/ //g'
