@@ -17,8 +17,11 @@ a:hover {
 }
 
 #page2 {
-    background-color: honeydew;
-  }
+  background-color: honeydew;
+}
+#page3 {
+  background-color: rgb(18, 236, 18);
+}
 
 #page4 {
   background-color: honeydew;
@@ -119,4 +122,9 @@ nav li {
 }
 #github {
   height: 300px;
+}
+
+#excontainer1 {
+  margin-top: 10vw;
+  background-color: honeydew;
 }
