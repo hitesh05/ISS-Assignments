@@ -140,23 +140,28 @@ nav li {
 }
 
 #excontainer1 {
-  margin-top: 10vw;
+  /* margin-top: 10vw; */
   background-color: honeydew;
+  /* margin: 50px; */
 }
 
-#Home{
+#Home {
   color: white;
 }
 
-#About{
+#About {
   color: white;
 }
 
-#Exercises{
+#Exercises {
   color: white;
 }
 
-#Contact{
+#Contact {
   color: white;
 }
 
+#changeimage {
+  height: 600px;
+  width: 700px;
+}
