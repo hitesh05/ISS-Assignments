@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
 
 <div class="container-fluid">
 
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+            crossorigin="anonymous" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
         <title>My website</title>
     </head>
 
@@ -69,11 +74,37 @@
             </table>
         </div>
         <div class="container">
-            <h6>*This is a merged cell</h6>
+            <h6 style="color: red">*This is a merged cell</h6>
         </div>
 
         <script src="../js/script.js"></script>
+
+
     </body>
 </div>
+
+<form style="padding: 10px">
+    <h2>Form:</h2>
+    <!-- needed for optimal spacing -->
+    <div class="form-group">
+        <label for="email">Name: </label>
+        <input type="name" class="form-control" id="name">
+    </div>
+
+    <div class="form-group">
+        <label for="skill">Skill: </label>
+        <input type="skill" class="form-control" id="skill">
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Level
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="#">Beginner</a></li>
+            <li><a href="#">Intermediate</a></li>
+            <li><a href="#">Proficient</a></li>
+        </ul>
+    </div>
+</form>
 
 </html>
