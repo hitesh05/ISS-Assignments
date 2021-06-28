@@ -76,3 +76,18 @@ function changeimage() {
     }
     count++;
 }
+
+//FORM:
+let count1 = 0;
+function beginnerclick() {
+    document.getElementById("dropdown1").innerHTML = "Beginner<span class=\"caret\"></span>";
+    count1 = 1;
+}
+function intermediateclick() {
+    document.getElementById("dropdown1").innerHTML = "Intermediate<span class=\"caret\"></span>";
+    count1 = 2;
+}
+function proficientclick() {
+    document.getElementById("dropdown1").innerHTML = "Proficient<span class=\"caret\"></span>";
+    count1 = 3;
+}
