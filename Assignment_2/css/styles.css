@@ -12,7 +12,8 @@ a:hover {
 } */
 
 #page1 {
-  background-image: url("images/background.jpg");
+  background-image: url("../img/background.jpg");
+  image-resolution: 50%;
   background-color: lightpink;
 }
 
