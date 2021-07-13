@@ -1,7 +1,7 @@
 #!/bin/bash
 
-rm -rf Assignment_2
+rm -rf Assignment_3A
 
-cp -r ../Assignment_2 Assignment_2
+cp -r ../Assignment_3A Assignment_3A
 
 git add .
