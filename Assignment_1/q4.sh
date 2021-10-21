@@ -13,7 +13,7 @@ while IFS= read -r line; do
    name="$line"
    sed -i "s/\b$name\b[[:punct:]]*//g" "$input"
 }
-done < "test.txt"
+done < "$filename"
 
 while IFS= read -r line; do
 {

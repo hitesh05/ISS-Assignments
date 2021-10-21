@@ -1,0 +1,44 @@
+.thin-red-border {
+  border-color: red;
+  border-width: 3px;
+  border-style: solid;
+}
+
+.alignment {
+  text-align: justify;
+  margin: 100px 300px;
+}
+
+.btn {
+  border-radius: 50%;
+  padding: 15px;
+}
+
+.btn:hover {
+  opacity: 0.5;
+}
+
+#red {
+  background-color: red;
+}
+
+#blue {
+  background-color: blue;
+}
+
+#green {
+  background-color: green;
+}
+
+.colorbuttons {
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  bottom: 0px;
+  right: 200px;
+  background-color: wheat;
+  border: solid 3px;
+  border-color: black;
+  /* width: 200px; */
+  /* //height: 70px; */
+}

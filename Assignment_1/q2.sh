@@ -34,8 +34,8 @@ fi
 fi
 #echo "Your age : $yyy years"
 
-touch "q2_output.txt"
+touch "$name"$yyy".txt"
 
-echo "$name"$yyy > "q2_output.txt"
+echo "$name"$yyy > "$name"$yyy".txt"
 # echo -n $yyy >> $name" "$yyy".txt"
 

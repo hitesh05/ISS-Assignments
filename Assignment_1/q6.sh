@@ -2,128 +2,134 @@
 
 clear
 
-words=0
-
-FILE="contacts.csv"
-if test -f "$FILE"
-then
-    words=`cat contacts.csv | wc -w`
-fi
-
-
+words=`cat contacts.csv | wc -w`
 
 if test $words = 0
 then
-    echo "fname, ""lname, ""mobile, ""Office " >> contacts.csv
+    echo "fname, ""lname, ""mobile, ""Office, " >> contacts.csv
 fi
-#echo >> "contacts.csv"
 
-while getopts 'C:f:l:n:o:k:c:v:' flag; do
-{
-    case "${flag}" in
-        C) command=${OPTARG}
-        if test "$command" = "display"
-        then
-        {
-            shift
-            if test "$2" = "-a"
-            then
-            {
-                lines=$(wc -l < "contacts.csv")
-                ((lines=lines-1))
-                sort "contacts.csv" | sed 's/ //g' | tail -n $lines
-            }
+case "$2" in
+insert)
+    shift
+    shift
+    while getopts 'f:l:n:o:' flag; do
+    {
+        case "${flag}" in
+            f) first=${OPTARG} ;;
+            l) last=${OPTARG} ;;
+            n) number=${OPTARG} ;;
+            o) company=${OPTARG} ;;
+        esac
+    }
+    done
 
-            elif test "$2" = "-d"
-            then
-            {
-               # head -n 1 contacts.csv
-                lines=`cat contacts.csv | wc -l`
-                ((lines=lines-1))
-                tail -n $lines contacts.csv | sort -r | sed 's/ //g'
-            }
-            fi
-            exit 0;
-        }
-        fi
-        ;;
-        f) first=${OPTARG} ;;
-        l) last=${OPTARG} ;;
-        n) number=${OPTARG} ;;
-        o) company=${OPTARG} ;;
-        k) modified=${OPTARG} ;;
-        c) input=${OPTARG} 
-        if test $input = "fname";
-        then
-            column=1
-        fi
+    echo -e "$first"", ""$last"", ""$number"", ""$company" >> "contacts.csv"
+    ;;
 
-        if test $input = "lname";
-        then
-            column=2
-        fi
+edit)
+    shift
+    shift
+    while getopts 'k:f:l:n:o:' flag; do
+    {
+        case "${flag}" in
+            k) modified=${OPTARG} ;;
+            f) first=${OPTARG} ;;
+            l) last=${OPTARG} ;;
+            n) number=${OPTARG} ;;
+            o) company=${OPTARG} ;;
+        esac
+    }
+    done
 
-        if test $input = "mobile";
-        then
-            column=3
-        fi
-
-        if test $input = "Office"
-        then
-            column=4
-        fi
-        ;;
-        v) value=${OPTARG} ;;
-    esac
-
-}
-done
-
-#echo $command
-
-if test "$command" = "insert"
-then
-{
-    echo "$first"", ""$last"", ""$number"", ""$company" >> "contacts.csv"
-}
-
-elif test "$command" = "edit"
-then
-{
     modified+=","
     #awk '{print $1}' contacts.csv | sed -i "/\b$modified\b/d" contacts.csv
     data=$(awk -v term="$modified" 'toupper($1)==toupper(term)' contacts.csv)
     grep -v "$data" contacts.csv > temp.csv; mv temp.csv contacts.csv
-    echo "$first"", ""$last"", ""$number"", ""$company" >> "contacts.csv"
-}
+    echo -e "$first"", ""$last"", ""$number"", ""$company" >> "contacts.csv"
+    ;;
 
-elif test "$command" = "search"
-then
-{
-    if test "$column" = "4"
-    then 
-        value=$value
-    else
-        value+=","
-    fi
+display)
+    shift
+    shift
+    case "$1" in 
+        -a) sort "contacts.csv" ;;
+        -d) sort -r "contacts.csv" ;;
+    esac
+    ;;
+
+search)
+    shift
+    shift
+
+    while getopts 'c:v:' flag; do
+    {
+        case "${flag}" in
+            c) input=${OPTARG} 
+            if test $input = "fname";
+            then
+                column=1
+            fi
+
+            if test $input = "lname";
+            then
+                column=2
+            fi
+
+            if test $input = "mobile";
+            then
+                column=4
+
+            fi
+            ;;
+            v) value=${OPTARG} ;;
+        esac
+    }
+    done
+
+   value+=","
+
     data=$(awk -v col=$column -v term="$value" 'toupper($col)==toupper(term)' contacts.csv)
     echo $data
-}
+    ;;
 
-elif test "$command" = "delete"
-then
-{
-    if test "$column" = "4"
-    then 
-        value=$value
-    else
-        value+=","
-    fi
+delete)
+    shift
+    shift
+    while getopts 'c:v:' flag; do
+    {
+        case "${flag}" in
+            c) input=${OPTARG} 
+            if test $input = "fname";
+            then
+                column=1
+            fi
 
-    #echo $value
+            if test $input = "lname";
+            then
+                column=2
+            fi
+
+            if test $input = "mobile";
+            then
+                column=4
+
+            fi
+            ;;
+            v) value=${OPTARG} ;;
+        esac
+    }
+    done
+
+    value+=","
+
     data=$(awk -v col=$column -v term="$value" 'toupper($col)==toupper(term)' contacts.csv)
-    #echo $data
     grep -v "$data" contacts.csv > temp.csv; mv temp.csv contacts.csv
-}
+    ;; 
 
-fi
+*)
+    echo Error! Flag not recognised!
+    exit 0
+    ;;
+
+esac

@@ -1,0 +1,10 @@
+email,profession,travel,symptomatic,chronic,status
+a@z.com,Healthcare,No,No,No,Active
+b@z.com,Healthcare,No,Yes,Yes,In Active
+c@z.com,Healthcare,Yes,Yes,No,Active
+d@z.com,IT,No,No,No,Active
+e@z.com,IT,Yes,No,No,In Active
+f@z.com,IT,Yes,Yes,No,In Active
+g@z.com,Police,No,No,No,Active
+h@z.com,Police,Yes,No,No,In Active
+i@z.com,Police,Yes,Yes,No,Active
